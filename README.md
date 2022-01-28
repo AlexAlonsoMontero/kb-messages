@@ -1,4 +1,6 @@
 # kb messages
+## METODOLOGÍA DE TRABAJO
+* Creare issuees dividiendo el trabajo en tareas, cada issue tendrdá su merge request correspondiente con la rama master
 
 ## BASE DE DATOS POSTGRESQL
 * Creamos usuarios tablas y damos permisos
