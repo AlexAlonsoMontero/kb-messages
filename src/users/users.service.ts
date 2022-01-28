@@ -10,8 +10,8 @@ export class UsersService {
         private users: Repository<users>
         ){}
 
-        findAll(){
-            return this.users.find()
+        async findAll (){
+            return await this.users.find()
             
         }
         createUser(){

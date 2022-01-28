@@ -4,7 +4,7 @@ import { MessagesService } from './messages.service';
 export class MessagesController {
     constructor (private messageService: MessagesService){}
     @Get()
-    findAll(){
+    findAll (){
         return this.messageService.findAllNewMessages()
     }
     @Post()
