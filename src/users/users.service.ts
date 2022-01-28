@@ -14,4 +14,19 @@ export class UsersService {
             return this.users.find()
             
         }
+        createUser(){
+            return "crear usuario";
+        }
+        login(){
+            return "Login user";
+        }
+        updateUser(){
+            return "actualizar datos de usuario";
+        }
+        findActiveUsers(){
+            this.login();
+        }
+        activateUser(){
+            return "Activando usuario";
+        }
     }

@@ -24,5 +24,10 @@ create table messages (
 	id_read_user int REFERENCES users ON DELETE CASCADE, 
 	read boolean
 );	
+
+```
+* Dar permisos a usuario
+```
+GRANT ALL PRIVILEGES ON DATABASE kubidebd to <username>
 ```
 
