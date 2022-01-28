@@ -1,4 +1,6 @@
 # kb messages
+## METODOLOGÍA DE TRABAJO
+* Creare issuees dividiendo el trabajo en tareas, cada issue tendrdá su merge request correspondiente con la rama master
 
 ## BASE DE DATOS POSTGRESQL
 * Creamos usuarios tablas y damos permisos
@@ -24,3 +26,13 @@ create table messages (
 );	
 ```
 
+## ESTABLEZCO PREFIJO DELA API
+* Archivo src/main.ts
+```
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api/v1');// prefijo de la api
+  await app.listen(3000);
+}
+bootstrap();
+```
