@@ -1,11 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 @Controller('messages')
 export class MessagesController {
-    constructor (private messageServide: MessagesService){}
+    constructor (private messageService: MessagesService){}
     @Get()
-    findAll(){
-        return this.messageServide.findAll()
+    findAll (){
+        return this.messageService.findAllNewMessages()
+    }
+    @Post()
+    createMessage(){
+        return this.messageService.createMessage()
+    }
+    @Get()
+    findAllUserMessages(){
+        return this.messageService.findAllUSerMessages();
     }
 
 }
