@@ -1,8 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import users from './users.entity';
 
 @Injectable()
 export class UsersService {
-    findAll(): any {
-        return 'findAll users funcionando';
+    constructor (
+        @InjectRepository(users)
+        private users: Repository<users>
+        ){}
+
+        findAll(){
+            return this.users.find()
+            
+        }
     }
-}
