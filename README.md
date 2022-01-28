@@ -26,13 +26,3 @@ create table messages (
 );	
 ```
 
-## ESTABLEZCO PREFIJO DELA API
-* Archivo src/main.ts
-```
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api/v1');// prefijo de la api
-  await app.listen(3000);
-}
-bootstrap();
-```
