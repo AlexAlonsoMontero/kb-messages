@@ -19,11 +19,10 @@ export class UsersService {
             try{
                 const addedUser =  this.users.create(newUser);
                 const result = await this.users.save(addedUser);
-                console.log(result)
-                return "ok";
+                return `Usuario añadido correctamente: ${addedUser.username} - ${addedUser.email}`;
             }catch(error){
                 console.error(error) 
-                return `No se ha podidoañadir a la base de datos 
+                return `No se ha podido añadir a la base de datos 
                 \n codigo de error: ${error.code}
                 \n detalle: ${error.detail}`
 
