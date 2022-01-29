@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import users from './users.entity';
 import { UserDto } from './user.dto';
 
+
+
 @Injectable()
 export class UsersService {
     constructor (
@@ -11,7 +13,7 @@ export class UsersService {
         private users: Repository<users>
         ){}
 
-        async findAll (){
+        async findAll (): Promise<users[]>{
             return await this.users.find()
             
         }
@@ -29,16 +31,19 @@ export class UsersService {
             }
             
         }
-        login(){
-            return "Login user";
+        async findUserMail(mail:string) : Promise<users | undefined>{
+            return this.users.findOne(mail)
         }
+        
         updateUser(){
             return "actualizar datos de usuario";
         }
-        findActiveUsers(){
-            this.login();
-        }
+        
         activateUser(){
             return "Activando usuario";
+        }
+        async findOne(username: string) {
+            const listUsers = await this.users.find()
+            return listUsers.find(user => user.username === username);
         }
     }

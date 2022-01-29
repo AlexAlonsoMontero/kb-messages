@@ -2,16 +2,20 @@ import { Controller, Get, Post, Put, Body } from '@nestjs/common';
 import { UserDto } from './user.dto';
 import { UsersService } from './users.service';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { Request } from '@nestjs/common';
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService){}
+        
     @Get()
     findAll(){
         return this.userService.findAll();
     }
-    //@UseGuards(AuthGuard('jwt'))
+    
+    
+
+
     @Post()
     createUser(@Body() newUser:UserDto){
         return this.userService.createUser(newUser);
@@ -21,10 +25,7 @@ export class UsersController {
         return this.userService.activateUser();
     }
     
-    @Post()
-    login(){
-        return this.userService.login();
-    }
+   
     @Put()
     updateUser(){
         return this.userService.updateUser();
@@ -33,4 +34,6 @@ export class UsersController {
     findActiveUsers(){
         return this.findActiveUsers();
     }
+    
+    
 }
