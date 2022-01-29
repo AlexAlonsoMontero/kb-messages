@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import users from './users.entity';
+import { UserDto } from './user.dto';
 
 @Injectable()
 export class UsersService {
@@ -14,8 +15,20 @@ export class UsersService {
             return await this.users.find()
             
         }
-        createUser(){
-            return "crear usuario";
+        async createUser(newUser: UserDto){
+            try{
+                const addedUser =  this.users.create(newUser);
+                const result = await this.users.save(addedUser);
+                console.log(result)
+                return "ok";
+            }catch(error){
+                console.error(error) 
+                return `No se ha podidoañadir a la base de datos 
+                \n codigo de error: ${error.code}
+                \n detalle: ${error.detail}`
+
+            }
+            
         }
         login(){
             return "Login user";
