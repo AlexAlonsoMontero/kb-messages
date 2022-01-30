@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "edf18a20-ffaa-4c96-90c4-cbf2e5c383b5",
+		"name": "kbe message",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Añadir usuario ( sin login)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"userpruebas12\",\n    \"email\":\"userpruebas12@userpruebas11.com\",\n    \"password\":\"userpruebas12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{users}}",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{users}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"userpruebas122@userpruebas122.com\",\n    \"password\":\"userpruebas122\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}/auth/login",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usurios activos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIyIiwiaWF0IjoxNjQzNTUyMzQ2LCJleHAiOjE2NDM2NjAzNDZ9.CxIzC4Hh59nxcKC10QpkkVu6vBGUXf5S8b0VJ5FprWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{users}}/active-users",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{users}}"
+							],
+							"path": [
+								"active-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar estado activo de usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIyIiwiaWF0IjoxNjQzNTUyMzQ2LCJleHAiOjE2NDM2NjAzNDZ9.CxIzC4Hh59nxcKC10QpkkVu6vBGUXf5S8b0VJ5FprWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{users}}/10/true",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{users}}"
+							],
+							"path": [
+								"10",
+								"true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar datos de  un usuario Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTAiLCJpYXQiOjE2NDM1NTA1MTQsImV4cCI6MTY0MzY1ODUxNH0.FaIlI98bfmP3xLDi5Nc5oNAzQDq-3RDc-ibb4EDrMnc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{users}}/1",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{users}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIxIiwiaWF0IjoxNjQzNTUyMjU5LCJleHAiOjE2NDM2NjAyNTl9.27hXfqaLwkP9l-SBBbuO2Od-RFlppImCRqrMXvOYy94",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"userpruebas3\",\n    \"email\":\"userpruebas3@userpruebas3.com\",\n    \"password\":\"userpruebas3\",\n    \"active\":false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{users}}/4",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{users}}"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "messages",
+			"item": [
+				{
+					"name": "Crear mensaje",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIyIiwiaWF0IjoxNjQzNTUyMzQ2LCJleHAiOjE2NDM2NjAzNDZ9.CxIzC4Hh59nxcKC10QpkkVu6vBGUXf5S8b0VJ5FprWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mail_read_user\": \"userpruebas8@userpruebas8.com\",\n    \"message\": \"prueba1324131\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{messages}}/28",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{messages}}"
+							],
+							"path": [
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leer notificaciones recibidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIyIiwiaWF0IjoxNjQzNTUyMzQ2LCJleHAiOjE2NDM2NjAzNDZ9.CxIzC4Hh59nxcKC10QpkkVu6vBGUXf5S8b0VJ5FprWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{messages}}/notifications/25",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{messages}}"
+							],
+							"path": [
+								"notifications",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leer mensajes recibidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJwcnVlYmFzMTIyIiwiaWF0IjoxNjQzNTUyMzQ2LCJleHAiOjE2NDM2NjAzNDZ9.CxIzC4Hh59nxcKC10QpkkVu6vBGUXf5S8b0VJ5FprWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{Api}}{{Version}}{{messages}}/25",
+							"host": [
+								"{{Host}}{{Api}}{{Version}}{{messages}}"
+							],
+							"path": [
+								"25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1 Llamada básica a la api, devuelve mesnaje de bienvenida Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}{{Api}}{{Version}}",
+					"host": [
+						"{{Host}}{{Api}}{{Version}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
