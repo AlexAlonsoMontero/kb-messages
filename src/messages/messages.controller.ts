@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { MessagesService } from './messages.service';
 import { Request } from '@nestjs/common';
@@ -25,7 +25,7 @@ export class MessagesController {
         return this.messageService.createMessage(id_write_user,request.body)
     }
     
-
+    
     
 
 }

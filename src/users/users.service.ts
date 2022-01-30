@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import users from './users.entity';
 import { UserDto } from './user.dto';
 import  * as bcrypt from 'bcrypt';
+import { find } from 'rxjs';
 
 @Injectable()
 export class UsersService {
@@ -69,9 +70,19 @@ export class UsersService {
             const listUsers = await this.users.find()
             return listUsers.filter(user=> user.active=== true)
             }catch(error){
-                console.log(error)
                 return this.userError(error)
             }
             
+        }
+
+        async changeUserState(id: number,state: boolean){
+            try{
+                let user: any  = await this.findUser(Number(id))
+                user.active = state;
+                await this.updateUser(id,user);
+                return `Estado de usuario ${state}`
+            }catch(error){
+                return this.userError(error)
+            }
         }
     }
