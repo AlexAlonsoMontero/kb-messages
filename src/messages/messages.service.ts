@@ -4,6 +4,7 @@ import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import messages from './messages.entity';
 import { MessageDto } from './message.dto';
+import internal from 'stream';
 @Injectable()
 export class MessagesService {
     constructor(
@@ -32,14 +33,30 @@ export class MessagesService {
         }
         
     }
-    async findAllUSerMessages(id_read_user: number) : Promise<messages[] |undefined |string>{
+    async findAllUSerMessages(id_read_user: number) :Promise<object[] | string> {
         try{
             const listMessages = await this.messages.find()
-            console.log(id_read_user)
             const result = listMessages.filter(mes=>
-                {   console.log(mes.id_read_user,id_read_user)
-                    if(mes.id_read_user===Number(id_read_user)){return mes}})
-            return result;
+                {   
+                    if(Number(mes.id_read_user) === Number(id_read_user)){
+                        console.log(mes.notification)
+                        return mes.notification}
+                })
+            return result.map(item =>{ return {messages:item.message, id_writer:item.id_write_user}});
+        }catch(error){
+            return this.userError(error)
+        }
+    }
+    async checkNotifications(id_read_user: number):Promise<object[] | string>{
+        try{
+            const listMessages = await this.messages.find()
+            const result = listMessages.filter(mes=>
+                {   
+                    if(Number(mes.id_read_user) === Number(id_read_user)){
+                        console.log(mes.notification)
+                        return mes.notification}
+                })
+            return result.map(item =>{ return {date:item.notification, id_writer:item.id_write_user}});
         }catch(error){
             return this.userError(error)
         }

@@ -22,7 +22,8 @@ create table messages (
 	message varchar(255),
 	id_write_user int REFERENCES users ON DELETE RESTRICT,
 	id_read_user int REFERENCES users ON DELETE CASCADE, 
-	read boolean DEFAULT false
+	read boolean DEFAULT false,
+    notification timestamp default now()
 );	
 
 ```

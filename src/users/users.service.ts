@@ -39,7 +39,7 @@ export class UsersService {
             }
         }
         
-        async updateUser(id_user: number, userRequest: any){
+        async updateUser(id_user: number, userRequest: any):Promise<string>{
             try{
                 userRequest.password = await bcrypt.hash(userRequest.password, Number(process.env.BCRYPT_SALT_ROUNDS))
                 await this.users.update(id_user, userRequest)
@@ -54,17 +54,22 @@ export class UsersService {
         activateUser(){
             return "Activando usuario";
         }
-        async findUserMail(email: string) {
-            const listUsers = await this.users.find()
-            return listUsers.find(user => user.email === email);
+        async findUserMail(email: string) : Promise<any | string> {
+            try{
+                const listUsers = await this.users.find()
+                return listUsers.find(user => user.email === email);
+            }catch(error){
+                return this.userError(error)
+            }
+            
         }
-        private  userError(error: any){
+        private  userError(error: any):string{
             console.error(error) 
             return `Error en la gestión de usuario 
             \n codigo de error: ${error.code}
             \n detalle: ${error.detail}`
         }
-        async  getActiveUsers() {
+        async  getActiveUsers() :Promise<any | string>{
             try{
             console.log("pp")    
             const listUsers = await this.users.find()
@@ -75,7 +80,7 @@ export class UsersService {
             
         }
 
-        async changeUserState(id: number,state: boolean){
+        async changeUserState(id: number,state: boolean) : Promise<string>{
             try{
                 let user: any  = await this.findUser(Number(id))
                 user.active = state;
