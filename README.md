@@ -15,7 +15,7 @@ CREATE TABLE users (
     username VARCHAR (255),
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255),
-    unique (email)
+    unique (email) DEFAULT true
 );  
 create table messages (
 	id_message serial primary key,
