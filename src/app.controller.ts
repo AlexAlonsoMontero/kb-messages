@@ -9,6 +9,10 @@ export class AppController {
     private authService: AuthService
     ) { }
 
+  @Get()
+  welcome(){
+    return "Bienvenido la api, esta api se la debemosa Marty McFly"
+  }
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req){
