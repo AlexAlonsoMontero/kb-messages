@@ -6,7 +6,7 @@ import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { config } from 'dotenv';
+import { JwtStrategy } from './jwt.strategy';
 
 
 @Module({
@@ -19,7 +19,7 @@ import { config } from 'dotenv';
       signOptions: { expiresIn: '1800m' },
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
