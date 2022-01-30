@@ -14,6 +14,9 @@ class users{
     @Column()
     password:string;
 
+    @Column()
+    active: boolean;
+
 }
 
 export default users;
