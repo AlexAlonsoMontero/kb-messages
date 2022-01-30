@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import users from './users.entity';
 import { UserDto } from './user.dto';
+import  * as bcrypt from 'bcrypt';
 
 
 
@@ -19,8 +20,11 @@ export class UsersService {
         }
         async createUser(newUser: UserDto){
             try{
-                const addedUser =  this.users.create(newUser);
-                const result = await this.users.save(addedUser);
+                let addedUser =  this.users.create(newUser);
+                addedUser.password = await bcrypt.hash(newUser.password, Number(process.env.BCRYPT_SALT_ROUNDS))
+                addedUser = this.users.create(addedUser)
+                console.log(addedUser)
+                await this.users.save(addedUser);
                 return `Usuario añadido correctamente: ${addedUser.username} - ${addedUser.email}`;
             }catch(error){
                 console.error(error) 
@@ -42,8 +46,8 @@ export class UsersService {
         activateUser(){
             return "Activando usuario";
         }
-        async findOne(username: string) {
+        async findOne(email: string) {
             const listUsers = await this.users.find()
-            return listUsers.find(user => user.username === username);
+            return listUsers.find(user => user.email === email);
         }
     }
