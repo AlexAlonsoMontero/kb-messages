@@ -15,7 +15,7 @@ export class MessagesService {
         return 'findAll messages funciona';
     }
 
-    async createMessage(id_write_user:  number, message_data: any){
+    async createMessage(id_write_user:  number, message_data: any): Promise<string>{
         try{
             const readUser = await this.userService.findUserMail(message_data.mail_read_user);
             if(readUser && readUser.active === true){
@@ -30,21 +30,19 @@ export class MessagesService {
         }catch(error){
             return this.userError(error)
         }
-        // async createUser(newUser: UserDto){
-        //     try{
-        //         let addedUser =  this.users.create(newUser);
-        //         addedUser.password = await bcrypt.hash(newUser.password, Number(process.env.BCRYPT_SALT_ROUNDS))
-        //         addedUser = this.users.create(addedUser)
-        //         await this.users.save(addedUser);
-        //         return `Usuario añadido correctamente: ${addedUser.username} - ${addedUser.email}`;
-        //     }catch(error){
-        //         return this.userError(error)
-        //     }
-            
-        // }
+        
     }
-    findAllUSerMessages(){
-        return "Todos los mensajes de un usuario";
+    async findAllUSerMessages(id_read_user: number) : Promise<messages[] |undefined |string>{
+        try{
+            const listMessages = await this.messages.find()
+            console.log(id_read_user)
+            const result = listMessages.filter(mes=>
+                {   console.log(mes.id_read_user,id_read_user)
+                    if(mes.id_read_user===Number(id_read_user)){return mes}})
+            return result;
+        }catch(error){
+            return this.userError(error)
+        }
     }
     
     private  userError(error: any){
