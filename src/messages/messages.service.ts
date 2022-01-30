@@ -33,7 +33,7 @@ export class MessagesService {
         }
         
     }
-    async findAllUSerMessages(id_read_user: number) {
+    async findAllUSerMessages(id_read_user: number) :Promise<object[] | string> {
         try{
             const listMessages = await this.messages.find()
             const result = listMessages.filter(mes=>
@@ -47,7 +47,7 @@ export class MessagesService {
             return this.userError(error)
         }
     }
-    async checkNotifications(id_read_user: number){
+    async checkNotifications(id_read_user: number):Promise<object[] | string>{
         try{
             const listMessages = await this.messages.find()
             const result = listMessages.filter(mes=>
