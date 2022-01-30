@@ -3,6 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import users from './users.entity';
 import { UserDto } from './user.dto';
+import  * as bcrypt from 'bcrypt';
+
+
 
 @Injectable()
 export class UsersService {
@@ -11,14 +14,17 @@ export class UsersService {
         private users: Repository<users>
         ){}
 
-        async findAll (){
+        async findAll (): Promise<users[]>{
             return await this.users.find()
             
         }
         async createUser(newUser: UserDto){
             try{
-                const addedUser =  this.users.create(newUser);
-                const result = await this.users.save(addedUser);
+                let addedUser =  this.users.create(newUser);
+                addedUser.password = await bcrypt.hash(newUser.password, Number(process.env.BCRYPT_SALT_ROUNDS))
+                addedUser = this.users.create(addedUser)
+                console.log(addedUser)
+                await this.users.save(addedUser);
                 return `Usuario añadido correctamente: ${addedUser.username} - ${addedUser.email}`;
             }catch(error){
                 console.error(error) 
@@ -29,16 +35,19 @@ export class UsersService {
             }
             
         }
-        login(){
-            return "Login user";
+        async findUserMail(mail:string) : Promise<users | undefined>{
+            return this.users.findOne(mail)
         }
+        
         updateUser(){
             return "actualizar datos de usuario";
         }
-        findActiveUsers(){
-            this.login();
-        }
+        
         activateUser(){
             return "Activando usuario";
+        }
+        async findOne(email: string) {
+            const listUsers = await this.users.find()
+            return listUsers.find(user => user.email === email);
         }
     }

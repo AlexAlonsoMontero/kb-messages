@@ -1,16 +1,20 @@
 import { Controller, Get, Post, Put, Body } from '@nestjs/common';
 import { UserDto } from './user.dto';
 import { UsersService } from './users.service';
-
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService){}
-
+    @UseGuards(JwtAuthGuard)    
     @Get()
     findAll(){
         return this.userService.findAll();
     }
     
+    
+
+
     @Post()
     createUser(@Body() newUser:UserDto){
         return this.userService.createUser(newUser);
@@ -20,10 +24,7 @@ export class UsersController {
         return this.userService.activateUser();
     }
     
-    @Post()
-    login(){
-        return this.userService.login();
-    }
+   
     @Put()
     updateUser(){
         return this.userService.updateUser();
@@ -32,4 +33,6 @@ export class UsersController {
     findActiveUsers(){
         return this.findActiveUsers();
     }
+    
+    
 }
