@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import users from './users.entity';
 import { UserDto } from './user.dto';
 import  * as bcrypt from 'bcrypt';
-import * as jwtDecode from 'jwt-decode';
 
 @Injectable()
 export class UsersService {
@@ -29,13 +28,7 @@ export class UsersService {
             }
             
         }
-        async findUserMail(mail:string) : Promise<users | undefined | string>{
-            try{
-                return await this.users.findOne(mail)                
-            }catch(error){
-                return this.userError(error)
-            }
-        }
+        
 
         async findUser(user_id:number) : Promise<users | undefined | string>{
             try{
@@ -60,7 +53,7 @@ export class UsersService {
         activateUser(){
             return "Activando usuario";
         }
-        async findOne(email: string) {
+        async findUserMail(email: string) {
             const listUsers = await this.users.find()
             return listUsers.find(user => user.email === email);
         }
