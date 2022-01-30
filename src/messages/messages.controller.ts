@@ -14,7 +14,12 @@ export class MessagesController {
         return this.messageService.findAllUSerMessages(id_read_user);
     }
 
-
+    @Get('notifications/:id_read_user')
+    checkNotifications(
+        @Param('id_read_user') id_read_user: number,
+    ){
+        return this.messageService.checkNotifications(id_read_user);
+    }
 
     @UseGuards(JwtAuthGuard)
     @Post(':id_write_user')

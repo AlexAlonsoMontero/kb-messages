@@ -3,7 +3,7 @@ export class MessageDto {
     constructor(
         message: string,
         id_write_user: number,
-        id_read_user: number
+        id_read_user: number,
     ){
         this.message = message,
         this.id_write_user = id_write_user,
