@@ -35,6 +35,13 @@ export class UsersController {
         return this.userService.updateUser(user_id, request.body);
     }
 
-    
+    @Put(':id/:state')
+    changeUserState(
+        @Param('id') id: number ,
+        @Param('state')state:boolean
+        ){
+        console.log(id,state)
+        return this.userService.changeUserState(id,state);
+    }
     
 }
