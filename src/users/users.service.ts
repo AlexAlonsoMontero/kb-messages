@@ -23,7 +23,6 @@ export class UsersService {
                 let addedUser =  this.users.create(newUser);
                 addedUser.password = await bcrypt.hash(newUser.password, Number(process.env.BCRYPT_SALT_ROUNDS))
                 addedUser = this.users.create(addedUser)
-                console.log(addedUser)
                 await this.users.save(addedUser);
                 return `Usuario añadido correctamente: ${addedUser.username} - ${addedUser.email}`;
             }catch(error){
