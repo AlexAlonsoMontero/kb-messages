@@ -39,7 +39,6 @@ export class MessagesService {
             const result = listMessages.filter(mes=>
                 {   
                     if(Number(mes.id_read_user) === Number(id_read_user)){
-                        console.log(mes.notification)
                         return mes.notification}
                 })
             return result.map(item =>{ return {messages:item.message, id_writer:item.id_write_user}});

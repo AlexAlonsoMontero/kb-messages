@@ -40,7 +40,6 @@ export class UsersController {
         @Param('id') id: number ,
         @Param('state')state:boolean
         ){
-        console.log(id,state)
         return this.userService.changeUserState(id,state);
     }
     

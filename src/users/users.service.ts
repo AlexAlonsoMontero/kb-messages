@@ -71,7 +71,6 @@ export class UsersService {
         }
         async  getActiveUsers() :Promise<any | string>{
             try{
-            console.log("pp")    
             const listUsers = await this.users.find()
             return listUsers.filter(user=> user.active=== true)
             }catch(error){
